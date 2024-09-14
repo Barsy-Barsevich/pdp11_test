@@ -1,0 +1,43 @@
+
+result.elf:     file format a.out-pdp11
+
+
+Disassembly of section .text:
+
+00004000 <_start>:
+    4000:	09f7 003c      	jsr	pc, 4040 <_program>
+    4004:	8800           	emt	0
+
+00004006 <___main>:
+    4006:	0087           	rts	pc
+
+00004008 <_outc>:
+    4008:	1166           	mov	r5, -(sp)
+    400a:	1185           	mov	sp, r5
+    400c:	1d40 0004      	mov	4(r5), r0
+    4010:	8804           	emt	4
+    4012:	1585           	mov	(sp)+, r5
+    4014:	0087           	rts	pc
+
+00004016 <_osword>:
+    4016:	1166           	mov	r5, -(sp)
+    4018:	1185           	mov	sp, r5
+    401a:	1d40 0004      	mov	4(r5), r0
+    401e:	1d41 0006      	mov	6(r5), r1
+    4022:	8803           	emt	3
+    4024:	1585           	mov	(sp)+, r5
+    4026:	0087           	rts	pc
+
+00004028 <_main>:
+    4028:	09f7 ffda      	jsr	pc, 4006 <___main>
+    402c:	15ff 0012 0010 	mov	$22, *$4042 <___START__>
+    4032:	1042           	mov	r1, r2
+    4034:	1042           	mov	r1, r2
+    4036:	1042           	mov	r1, r2
+    4038:	1042           	mov	r1, r2
+    403a:	1042           	mov	r1, r2
+    403c:	1042           	mov	r1, r2
+    403e:	01f9           	br	4032 <_main+0xa>
+
+00004040 <_program>:
+    4040:	0087           	rts	pc

@@ -1,0 +1,36 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+rom              0x0000000000004000 0x0000000000000400 xr
+ram              0x0000000000008000 0x0000000000008000 rw !x
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD crt0_gcc.o
+LOAD main.o
+
+.text           0x0000000000004000       0x42
+ *(.text)
+ .text          0x0000000000004000       0x28 crt0_gcc.o
+                0x0000000000004000                start
+                0x0000000000004006                __main
+                0x0000000000004008                outc
+                0x0000000000004016                osword
+ .text          0x0000000000004028       0x1a main.o
+                0x0000000000004028                main
+                0x0000000000004040                program
+                0x0000000000004042                ___START__ = .
+                0x0000000000004042                _ram_start = .
+
+.data           0x0000000000008000        0x0
+ *(.data)
+ .data          0x0000000000008000        0x0 crt0_gcc.o
+ .data          0x0000000000008000        0x0 main.o
+
+.bss            0x0000000000008000        0x0
+ *(.bss)
+ .bss           0x0000000000008000        0x0 crt0_gcc.o
+ .bss           0x0000000000008000        0x0 main.o
+OUTPUT(result.elf a.out-pdp11)
